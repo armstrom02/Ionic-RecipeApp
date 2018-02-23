@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { NgForm } from "@angular/forms/src/forms";
 import { ShoppingListService } from "../../Services/shopping-list";
 import { Ingredient } from "../../Models/ingredient";
@@ -26,9 +26,8 @@ export class ShoppingListPage {
     this.loadItems();
   }
 
- 
 
-  onCheckItem(index: number){
+  onCheckItem(index: number) {
     this.slService.removeItem(index);
     this.loadItems();
 
@@ -38,7 +37,3 @@ export class ShoppingListPage {
     this.listItems = this.slService.getItem();
   }
 }
-
-  
-
-

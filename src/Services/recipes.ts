@@ -5,7 +5,7 @@ import { Ingredient } from "../Models/ingredient";
 export class RecipeService {
     private recipes: Recipe[] = [];
 
-    addRecipe(title: String, description: String, difficulty: String, ingredients: Ingredient[]) {
+    addRecipe(title: string, description: string, difficulty: string, ingredients: Ingredient[]) {
         this.recipes.push(new Recipe(title, description, difficulty, ingredients));
         console.log("recipe Added")
         console.log(this.recipes);
@@ -15,7 +15,7 @@ export class RecipeService {
         return this.recipes.slice();
     }
 
-    updateRecipe(index: number, title: String, description: String, difficulty: String, ingredients: Ingredient[]) {
+    updateRecipe(index: number, title: string, description: string, difficulty: string, ingredients: Ingredient[]) {
         this.recipes[index] = new Recipe(title, description, difficulty, ingredients)
     }
 
