@@ -47,7 +47,8 @@ export class ShoppingListPage {
     const popover = this.popoverCtrl.create(SlOptionsPage)
     popover.present({ ev: event });
     popover.onDidDismiss(data => {
-      if (data.action == 'Load') {
+      if (data.action == 'load') {
+        console.log('load');
         this.authService.getActiveUser().getToken()
         .then(
           (token: string) => {
@@ -59,6 +60,7 @@ export class ShoppingListPage {
                   }else {
                     this.listItems=[];
                   }
+                  
                 },
                 error => {
                   console.log(error);
