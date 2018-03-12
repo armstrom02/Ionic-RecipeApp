@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { NgForm } from "@angular/forms/src/forms";
 import { ShoppingListService } from "../../Services/shopping-list";
 import { Ingredient } from "../../Models/ingredient";
+import { SlOptionsPage } from './sl-options/sl-options';
+import { AuthService } from '../../Services/auth';
 
 
 
@@ -13,7 +15,11 @@ import { Ingredient } from "../../Models/ingredient";
 export class ShoppingListPage {
 
   listItems: Ingredient[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private slService: ShoppingListService) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private slService: ShoppingListService,
+    private popoverCtrl: PopoverController,
+    private authService: AuthService) {
   }
 
   ionViewWillEnter() {
@@ -35,5 +41,43 @@ export class ShoppingListPage {
 
   private loadItems() {
     this.listItems = this.slService.getItem();
+  }
+
+  onShowOptions(event: MouseEvent) {
+    const popover = this.popoverCtrl.create(SlOptionsPage)
+    popover.present({ ev: event });
+    popover.onDidDismiss(data => {
+      if (data.action == 'Load') {
+        this.authService.getActiveUser().getToken()
+        .then(
+          (token: string) => {
+              this.slService.fetchList(token)
+              .subscribe(
+                (list: Ingredient[]) =>{
+                  if(list){
+                    this.listItems = list;
+                  }else {
+                    this.listItems=[];
+                  }
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+          });
+
+      } else {
+        this.authService.getActiveUser().getToken()
+          .then(
+            (token: string) => {
+                this.slService.storeList(token).subscribe(
+                  ()=> console.log ('Success!'),
+                  error => {
+                    console.log(error);
+                  }
+                )
+            });
+      }
+    });
   }
 }

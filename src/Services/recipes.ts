@@ -1,6 +1,7 @@
 
 import { Recipe } from "../Models/recipe";
 import { Ingredient } from "../Models/ingredient";
+import { EditRecipePageModule } from "../pages/edit-recipe/edit-recipe.module";
 
 export class RecipeService {
     private recipes: Recipe[] = [];
@@ -8,7 +9,6 @@ export class RecipeService {
     addRecipe(title: string, description: string, difficulty: string, ingredients: Ingredient[]) {
         this.recipes.push(new Recipe(title, description, difficulty, ingredients));
         console.log("recipe Added")
-        console.log(this.recipes);
     }
 
     getRecipe() {
@@ -17,6 +17,7 @@ export class RecipeService {
 
     updateRecipe(index: number, title: string, description: string, difficulty: string, ingredients: Ingredient[]) {
         this.recipes[index] = new Recipe(title, description, difficulty, ingredients)
+        console.log("recipe updated")
     }
 
     removeRecipe(index: number){
