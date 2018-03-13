@@ -19,7 +19,6 @@ export class RecipePage implements OnInit {
   ngOnInit() {
     this.recipe = this.navParams.get("recipe");
     this.index = this.navParams.get("index");
-    console.log(this.recipe);
   }
 
   onAddIngredients() {

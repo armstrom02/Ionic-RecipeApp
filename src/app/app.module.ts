@@ -15,7 +15,7 @@ import { RecipeService } from "../Services/recipes";
 import { AuthService } from "../Services/auth";
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
-import { SlOptionsPage } from "../pages/shopping-list/sl-options/sl-options"
+import { SlOptionsPage } from "../pages/database-options/sl-options"
 import { HttpModule } from '@angular/http';
 
 @NgModule({

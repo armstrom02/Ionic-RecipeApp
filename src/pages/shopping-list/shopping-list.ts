@@ -3,7 +3,7 @@ import { NavController, NavParams, PopoverController, LoadingController, AlertCo
 import { NgForm } from "@angular/forms/src/forms";
 import { ShoppingListService } from "../../Services/shopping-list";
 import { Ingredient } from "../../Models/ingredient";
-import { SlOptionsPage } from './sl-options/sl-options';
+import { SlOptionsPage } from '../database-options/sl-options';
 import { AuthService } from '../../Services/auth';
 
 
@@ -52,7 +52,9 @@ export class ShoppingListPage {
     const popover = this.popoverCtrl.create(SlOptionsPage)
     popover.present({ ev: event });
     popover.onDidDismiss(data => {
-
+      if(!data){
+        return;
+      }
       if (data.action == 'load') {
         loading.present();
         this.authService.getActiveUser().getToken()
